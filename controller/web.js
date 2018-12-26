@@ -1,8 +1,8 @@
 /*
  * Name: web.js
  * Author: Joaquin Rodriguez
- * Copyright: 2015-2016 Merit Charge, LLC.
- * Date: 01/2016
+ * Copyright: 2018 Meritoki
+ * Date: 2018/07
  * Reference: http://www.clock.co.uk/blog/a-simple-website-in-nodejs-with-express-jade-and-stylus
  * Reference: https://www.codementor.io/nodejs/tutorial/build-website-from-scratch-using-expressjs-and-bootstrap
  * Reference: http://stackoverflow.com/questions/21194934/node-how-to-create-a-directory-if-doesnt-exist
@@ -14,17 +14,12 @@ var oauth2orize = require('oauth2orize');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var redis = require('redis');
-var connectRedis = require('connect-redis')(session);
 var properties = require('./properties.js');
 var header = require('./interface/header.js');
 var protocol = require('./interface/protocol.js');
 var appPath = require('./interface/app/path.js');
-var servicePath = require('./interface/service/path.js');
 var security = require('./interface/security.js');
-var relational = require('../model/relational.js');
 var web = express();
-var redisClient = redis.createClient();
 var router = express.Router();
 var view = __dirname + '/../view';
 var model = __dirname + '/../model';
@@ -33,8 +28,8 @@ var oauth2orize = require('oauth2orize');
 var oauth2orizeServer = oauth2orize.createServer();
 var connectEnsureLogin = require('connect-ensure-login');
 
-console.log("Web");
-console.log("Version 0.1.0");
+console.log(properties.name);
+console.log("version "+properties.version);
 security.log(web);
 web.set('views', view);
 web.set('view engine', 'jade');
@@ -62,10 +57,8 @@ web.use(passport.initialize());
 web.use(passport.session());
 web.use("/", router);
 require('./interface/authentication.js');
+
 appPath.delete(router);
 appPath.get(router,passport);
 appPath.post(router,passport);
-servicePath.delete(router);
-servicePath.get(router,passport);
-servicePath.post(router,passport);
 protocol.initialize(web,router);

@@ -1,1 +1,0 @@
-INSERT INTO `Queue` (`idQueue`,`idAccount`,`name`) VALUES (1,1,'Automatic Question & Answer Dispenser');

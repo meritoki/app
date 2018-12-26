@@ -1,2 +1,0 @@
-INSERT INTO UserProcedure (`owner`,`permission`,`idUser`,`idProcedure`) 
-SELECT owner, permission, u.idUser, ep.idProcedure FROM EmployeeProcedure ep INNER JOIN Employee e ON e.idEmployee = ep.idEmployee LEFT OUTER JOIN User u ON u.idUser=e.idEmployee;

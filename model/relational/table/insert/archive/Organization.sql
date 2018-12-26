@@ -1,3 +1,0 @@
-INSERT INTO `Organization` (`idOrganization`,`idAccount`,`name`,`createDate`,`activityDate`) VALUES (1,1,'Merit Builders, Inc.', '1987-01-01 00:00:00', NOW());
-INSERT INTO `Organization` (`idOrganization`,`idAccount`,`name`,`createDate`,`activityDate`) VALUES (2,1,'JLG Industries', '1969-01-01 00:00:00', NOW());
-INSERT INTO `Organization` (`idOrganization`,`idAccount`,`name`,`createDate`,`activityDate`) VALUES (3,1,'National Safety Council', '1947-07-01 00:00:00', NOW());

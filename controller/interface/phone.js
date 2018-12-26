@@ -23,7 +23,7 @@ var test = function (to) {
 }
 
 var welcome = function (to) {
-    textMessage(to, properties.phone.from, 'Welcome to the Merit Builders Management System!', function (error, message) {
+    textMessage(to, properties.phone.from, 'Welcome to Metanoia!', function (error, message) {
         if (!error) {
             console.log(message.sid);
         } else {

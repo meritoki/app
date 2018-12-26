@@ -1,1 +1,0 @@
-select idEmployee, i.name from Employee e INNER JOIN User u ON u.idUser=e.idUser INNER JOIN Identification i ON i.idUser=e.idUser;

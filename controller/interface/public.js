@@ -89,19 +89,6 @@ exports.getHashLoginFailure = function(req, res) {
   });
 }
 
-exports.getAPILoginFailure = function(req, res) {
-  var user = req.user;
-  if (user !== undefined) {
-    var role = user.role;
-    menu = getMenu(role);
-  }
-  res.render('public/login', {
-    title: 'LOGIN FAILURE',
-    action: '/api/login',
-    menu: menu,
-    message: 'Please check your username or password and try again'
-  });
-}
 
 exports.getLoginFailure = function(req, res) {
   var user = req.user;
@@ -123,17 +110,10 @@ exports.getIndex = function(req, res) {
     var role = user.role;
     menu = getMenu(role);
   }
-  if (properties.maintenance.switch) {
-    res.render('public/maintenance', {
-      title: 'MAINTENANCE',
-      date: properties.maintenance.date
-    });
-  } else {
-    res.render('index', {
-      title: 'HOME',
-      menu: menu
-    });
-  }
+  res.render('index', {
+    title: 'HOME',
+    menu: menu
+  });
 }
 
 

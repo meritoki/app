@@ -1,6 +1,6 @@
 #!/bin/sh
-ORGANIZATION=organization
-NAME=web
+ORGANIZATION=meritoki
+NAME=metanoia
 PROGRAM=$NAME
 VERSION="0.1"
 TAG="v$VERSION"

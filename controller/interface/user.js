@@ -3,7 +3,6 @@
  * Date: 2015-07-08
  * Author: Joaquin Osvaldo Rodriguez
  */
-var relational = require('../../model/relational.js');
 var properties = require('../properties.js');
 var fs = require('fs');
 var path = require('path');
@@ -11,7 +10,7 @@ var bcrypt = require('bcryptjs');
 
 var getMenu = function(role) {
   var m = {};
-  if (role.indexOf(",") > -1) {
+  if (role != undefined && role.indexOf(",") > -1) {
     m = getMenu(role.split(",")[0]);
   } else {
     if (('administrator').indexOf(role) > -1) {
@@ -42,42 +41,19 @@ var getURL = function() {
 };
 
 
-
-exports.deleteProcedure = function(req, res, next) {
-  console.log('deleteProcedure');
-  //    var user = req.user;
-  //    var role = user.role;
-  var idProcedure = req.params.idProcedure;
-  //    if (isAuthorized(role, "general-manager")) {
-  relational.getProcedure(idProcedure, function(error, p) {
-    if (error) {
-      res.end('{"status":500}');
-
-    } else {
-      if (p !== null) {
-        relational.removeProcedure(idProcedure, function(error, result) {
-          res.end('{"status":200,"idProcedure":' + idProcedure + '}');
-        });
-      } else {
-        res.end('{"status":500,"idProcedure":' + idProcedure + '}');
-      }
-    }
-  });
-};
-
 exports.getAccount = function(req, res, next) {
   console.log("user.getAccount");
   var user = req.user;
   var idUser = user.idUser;
   var role = user.role;
   var menu = getMenu(role);
-  if (isAuthorized(role, "administrator")) {
+  // if (isAuthorized(role, "consumer")) {
       res.render('account', {
         title: 'EMPLOYEE ACCOUNT',
         menu: menu,
         user: user
       });
-  }
+  // }
 };
 
 exports.getNotAuthorized = function(req, res, next) {
