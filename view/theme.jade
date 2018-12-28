@@ -1,22 +1,33 @@
 doctype
 html
     head
-        title Metanoia
+        title MERITOKI Management System
     block head-link
         link(rel='shortcut icon', href='/organization/img/logo/favicon.ico', type='image/x-icon')
-        //link(rel='stylesheet', href='/organization/css/theme.css')
-        meta(charset='UTF-8')
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        meta(name='description', content='')
-        meta(name='author', content='')
-        link(rel='icon', href='../../favicon.ico')
-        title Daily Bread
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/organization/css/theme.css')
     block head-script
         script(type='text/javascript' src='/jquery/js/jquery-2.1.4.min.js')
     block head-meta
         meta(name='viewport' content='user-scalable=no; width=device-width; initial-scale=1; maximum-scale=1;')
     body
-
-    block body-script
+        .wrapper
+            .header
+                nav.no-print
+                    a.selected(href='#', id='menu-icon')
+                    ul
+                        if typeof(menu) !== 'undefined'
+                            -var selected = 'home';
+                            each val, key in menu
+                                li
+                                    if selected === key
+                                        a.button.selected(href=val, title=key)= key
+                                    else
+                                        a.button(href=val, title=key)= key
+                span.notranslate
+                    h1 MANAGEMENT SYSTEM #{title}
+            .content
+                block content
+            .footer
+                span.notranslate
+                    p Version 0.1 Copyright 2018 MERITOKI All Right Reserved
+        block body-script

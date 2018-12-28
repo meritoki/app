@@ -27,6 +27,9 @@ var passport = require('passport');
 var oauth2orize = require('oauth2orize');
 var oauth2orizeServer = oauth2orize.createServer();
 var connectEnsureLogin = require('connect-ensure-login');
+var redis = require("redis");
+var redisStore = require('connect-redis')(session);
+var client  = redis.createClient();
 
 console.log(properties.name);
 console.log("version "+properties.version);
@@ -44,12 +47,13 @@ web.use(bodyParser.urlencoded({
 }));
 // web.use(cookieParser(properties.cookie.secret));
 web.use(session({
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: {
     maxAge: properties.session.maxAge
   },
-  secret: properties.session.secret
+  secret: properties.session.secret,
+  store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl :  260}),
 }));
 web.use('/media', connectEnsureLogin.ensureLoggedIn());
 web.use(function(req, res, next){header.initialize(req, res, next)});

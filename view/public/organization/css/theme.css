@@ -163,56 +163,11 @@ a:active {
     text-decoration: none;
 }
 
-.button {
-    display: inline;
-    text-align: center;
-    /*background: #02277B;*/
-    /*border: 2px solid rgba(255, 255, 255, 0.8);*/
-    padding: 1em;
-    color: white;
-    font: bold 1em/30px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-    /*background: -webkit-linear-gradient(top, #02277B, #022F96);
-    background: -moz-linear-gradient(top, #02277B, #022F96);
-    background: -o-linear-gradient(top, #02277B, #022F96);
-    background: -ms-linear-gradient(top, #02277B, #022F96);
-    background: linear-gradient(top, #02277B, #022F96);
-    -webkit-border-radius: 15px;
-    -khtml-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    -webkit-box-shadow: 0 8px 0 rgba(234, 189, 42, 0.8);
-    -moz-box-shadow: 0 8px 0 rgba(234, 189, 42, 0.8);
-    box-shadow: 0 8px 0 rgba(234, 189, 42, 0.8);
-    text-shadow: 0 2px 2px rgba(255, 255, 255, 0.2);*/
-}
-
-/*input[type=button].button {
-    text-decoration: none;
-}*/
-
-/*input[type=button].button:hover {
-    background: #0338AF;
-    background: -webkit-linear-gradient(top, #0338AF, #022F96);
-    background: -moz-linear-gradient(top, #0338AF, #022F96);
-    background: -o-linear-gradient(top, #0338AF, #022F96);
-    background: -ms-linear-gradient(top, #0338AF, #022F96);
-    background: linear-gradient(top, #0338AF, #022F96);
-}
-
-a.button:hover {
-    background: #0338AF;
-    background: -webkit-linear-gradient(top, #0338AF, #022F96);
-    background: -moz-linear-gradient(top, #0338AF, #022F96);
-    background: -o-linear-gradient(top, #0338AF, #022F96);
-    background: -ms-linear-gradient(top, #0338AF, #022F96);
-    background: linear-gradient(top, #0338AF, #022F96);
-}
-
 .wrapper {
     width: 100%;
     min-height: 100%;
     position: relative;
-}*/
+}
 
 #logo {
     width: 190px;
@@ -232,7 +187,7 @@ a.button:hover {
     left: 0;
     z-index: 100;
     color: white;
-    background-color: rgba(140,33,0, 0.9);
+    background-color: rgba(30, 47, 97, 0.9);
 }
 
 .header h1,
@@ -284,7 +239,7 @@ a:hover#menu-icon {
     background-color: #444;
     border-radius: 4px 4px 0 0;
 }
-/*
+
 .content {
     width: 100%;
     padding-bottom: 30px;
@@ -346,7 +301,7 @@ h3 {
 
 .content-wrapper h1 {
     color: rgba(30, 47, 97, 0.9);
-}*/
+}
 
 .footer {
     position: absolute;
@@ -356,7 +311,7 @@ h3 {
     color: white;
     text-align: center;
     left: 0;
-    background-color: rgba(0,0,0, 0.8);
+    background-color: rgba(234, 189, 42, 0.8);
 }
 
 .scaleResult {
@@ -377,22 +332,9 @@ h3 {
     -ms-transform: scale(0.8);
     transform: scale(0.8);
 }
-/*
+
 table tr td {
     text-align: center;
-}*/
-
-#google_translate_element {
-    margin-bottom: 5em;
-    padding: 1em;
-    color: rgba(30, 47, 97, 0.9);
-    display: inline-block;
-}
-
-#google_translate_element a:link span {
-    text-decoration: none;
-    text-transform: capitalize;
-    color: rgba(30, 47, 97, 0.9);
 }
 
 .apply {
@@ -478,13 +420,13 @@ table tr td {
     display: inline-block;
 }
 
-/*.list table {
+.list table {
     width: 100%;
     border-style: solid;
     border-width: 2px;
     border-color: rgba(234, 189, 42, 0.8);
     border-radius: 5px;
-}*/
+}
 
 .list td {
     width: 20em;
@@ -493,7 +435,7 @@ table tr td {
     text-align: center;
 }
 
-/*.table {
+.table {
     margin: 1em;
     padding: 1em;
     position: relative;
@@ -514,7 +456,7 @@ table tr td {
 
 .table a {
     color: black;
-}*/
+}
 
 .table a:link {
     color: black;

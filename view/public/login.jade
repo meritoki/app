@@ -1,31 +1,17 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='UTF-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='')
-    meta(name='author', content='')
-    link(rel='icon', href='../../favicon.ico')
-    title JADE-Bootstrap
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
-    // link(rel="stylesheet",href="css/bootstrap.min.css")
-    // Custom styles for this template
-    link(href='/meritoki/css/public/signin.css', rel='stylesheet')
-  body(data-spy='scroll', data-target='.scrollspy')
-    .container
-      form.form-signin(action="/api/login", method="POST")
-        h2.form-signin-heading Please sign in
-        label.sr-only(for='inputEmail') Email address
-        input#inputEmail.form-control(type='email', placeholder='Email address', name="username",required='', autofocus='')
-        label.sr-only(for='inputPassword') Password
-        input#inputPassword.form-control(type='password', placeholder='Password', name="password",required='')
-        .checkbox
-          label
-            input(type='checkbox', value='remember-me')
-            |  Remember me
-        button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
-    // script(src="js/jquery.min.js")
-    // script(src="js/bootstrap.min.js")
+extends ../theme
+block append head-link
+    link(rel='stylesheet', href='/organization/css/public/login.css')
+block content
+    .content-wrapper
+        form(class="login-form", action="#{action}", method="POST")
+            h3.message #{message}
+            br
+            label User
+            br
+            label Name
+            input(type="text", name="name", id="name", autocomplete="off")
+            label Password
+            input(type="password", name="password", id="password")
+            br
+            br
+            input(type="submit", class="button", value="LOGIN")
