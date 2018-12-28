@@ -49,7 +49,7 @@ exports.getAccount = function(req, res, next) {
   var menu = getMenu(role);
   // if (isAuthorized(role, "consumer")) {
       res.render('account', {
-        title: 'EMPLOYEE ACCOUNT',
+        title: 'ACCOUNT',
         menu: menu,
         user: user
       });

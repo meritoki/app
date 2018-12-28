@@ -2,7 +2,6 @@
 var connectEnsureLogin = require('connect-ensure-login');
 var properties = require('../../properties.js');
 var public = require('../public.js');
-var oauth2 = require('../oauth2.js');
 var user = require('../user.js');
 
 
@@ -17,20 +16,7 @@ exports.get = function(router, passport) {
   router.get("/login", public.getLogin);
   router.get("/login/failure", public.getLoginFailure);
   router.get("/logout", public.getLogout);
-  router.get("/not-authorized", connectEnsureLogin.ensureLoggedIn(), user.getNotAuthorized);
-
-  //router.get("/consumer", connectEnsureLogin.ensureLoggedIn(), organization.getIndex);
-  //router.get("/consumer", connectEnsureLogin.ensureLoggedIn(), organization.getIndex);
-  //router.get("/consumer", connectEnsureLogin.ensureLoggedIn(), organization.getIndex);
-  //router.get("/consumer", connectEnsureLogin.ensureLoggedIn(), organization.getIndex);
-
-  //router.get("/producer", connectEnsureLogin.ensureLoggedIn(), producer.getIndex);
-
-  //router.get("/organization", connectEnsureLogin.ensureLoggedIn(), organization.getIndex);
-  //router.get("/organization/leader", connectEnsureLogin.ensureLoggedIn(), organization.getLeader);
-  //router.get("/organization/member", connectEnsureLogin.ensureLoggedIn(), organization.getMember);
-  //router.get("/organization/viewer", connectEnsureLogin.ensureLoggedIn(), organization.getViewer);
-
+  router.get("/not-authorized", connectEnsureLogin.ensureLoggedIn(), public.getNotAuthorized);
 };
 
 exports.post = function(router, passport) {

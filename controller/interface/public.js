@@ -34,62 +34,6 @@ exports.getLogin = function(req, res) {
   })
 }
 
-exports.getHashLogin = function(req, res) {
-  var user = req.user;
-  if (user !== undefined) {
-    var role = user.role;
-    menu = getMenu(role);
-  }
-  res.render('public/login', {
-    menu: menu,
-    action: '/hash/login',
-    title: 'LOGIN'
-  })
-}
-
-exports.getAPILogin = function(req, res) {
-  var user = req.user;
-  if (user !== undefined) {
-    var role = user.role;
-    menu = getMenu(role);
-  }
-  res.render('public/login', {
-    menu: menu,
-    action: '/api/login',
-    title: 'LOGIN'
-  })
-}
-
-exports.getLoginFailure = function(req, res) {
-  var user = req.user;
-  if (user !== undefined) {
-    var role = user.role;
-    menu = getMenu(role);
-  }
-  res.render('public/login', {
-    title: 'LOGIN FAILURE',
-    action: '/login',
-    menu: menu,
-    message: 'Please check your username or password and try again'
-  });
-}
-
-
-exports.getHashLoginFailure = function(req, res) {
-  var user = req.user;
-  if (user !== undefined) {
-    var role = user.role;
-    menu = getMenu(role);
-  }
-  res.render('public/login', {
-    title: 'LOGIN FAILURE',
-    action: '/hash/login',
-    menu: menu,
-    message: 'Please check your username or password and try again'
-  });
-}
-
-
 exports.getLoginFailure = function(req, res) {
   var user = req.user;
   if (user !== undefined) {
@@ -134,8 +78,12 @@ exports.postLogin = passport.authenticate('local', {
 });
 
 
-exports.postAPILogin = passport.authenticate('local', {
-  // successReturnToOrRedirect: '/',
-  successReturnToOrRedirect: '/',
-  failureRedirect: '/api/login/failure'
-});
+exports.getNotAuthorized = function(req, res, next) {
+  var user = req.user;
+  var role = user.role;
+  var menu = getMenu(role);
+  res.render('account/not-authorized', {
+    title: 'NOT AUTHORIZED',
+    menu: menu
+  });
+};
