@@ -7,13 +7,6 @@
     color: red;
 }
 
-.login-form li {
-    padding: 0;
-    display: block;
-    list-style: none;
-    margin: 10px 0 0 0;
-}
-
 .login-form label {
     margin: 0 0 3px 0;
     padding: 0px;
@@ -96,4 +89,63 @@ select {
 
 .login-form .required {
     color: red;
+}
+
+
+.content-wrapper {
+    position: relative;
+    min-height: 100%;
+    margin: 1em;
+    padding: 1em;
+    position: relative;
+    border-style: solid;
+    color: black;
+    border-color: rgba(234, 189, 42, 0.8);
+    border-width: 5px;
+    border-radius: 15px;
+    min-height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    text-align: center;
+}
+
+.content-wrapper h1,
+h2,
+h3 {
+    color: rgba(30, 47, 97, 0.9);
+    text-align: center;
+}
+
+.content-wrapper a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.content-wrapper a:hover {
+    color: white;
+}
+
+.content-wrapper a:link {
+    color: white;
+}
+
+.content-wrapper label {
+    color: rgba(30, 47, 97, 0.9);
+    text-align: center;
+}
+
+.content-wrapper ul {
+    list-style: none;
+}
+
+.content-wrapper li {
+    display: inline-block;
+        float: left;
+
+    margin-bottom: 1em;
+}
+
+.content-wrapper h1 {
+    color: rgba(30, 47, 97, 0.9);
 }

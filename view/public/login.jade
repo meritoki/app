@@ -2,7 +2,6 @@ extends ../theme
 block append head-link
     link(rel='stylesheet', href='/organization/css/public/login.css')
 block content
-    .content-wrapper
         form(class="login-form", action="#{action}", method="POST")
             h3.message #{message}
             br

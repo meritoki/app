@@ -1,0 +1,83 @@
+
+.begin {
+  position: relative;
+  background: url('/organization/img/bread.jpg') no-repeat center center fixed;
+  background-size: auto 100%;
+  margin: 1em;
+}
+
+.begin h1 {
+  font-weight: bold;
+  color: #000;
+  font-size: 32px;
+
+}
+
+.begin table {
+  border-spacing: 10px;
+  border-collapse: separate;
+  /* margin:5em; */
+}
+
+.begin td {
+  background: rgba(255,255,255, 0.7) ;
+  width: 50%;
+  margin:20px;
+  text-align:center;
+  padding: 1em;
+}
+
+.begin table td {
+
+  /* margin:5em; */
+}
+
+
+.end {
+    position: relative;
+  background: white;// url('/organization/img/bread.jpg') no-repeat center center fixed;
+    margin: 1em;
+}
+
+.end table {
+  border-spacing: 10px;
+  border-collapse: separate;
+  /* margin:5em; */
+}
+
+.end td {
+  background: purple ;
+  width: 50%;
+  height:16em;
+  margin:20px;
+  text-align:center;
+  padding: 1em;
+}
+
+.end h1 {
+  font-weight: bold;
+  font-style: italic;
+  color: #fff;
+  font-size: 32px;
+
+}
+
+.end h2 {
+  font-weight: bold;
+  color: #000;
+  font-size: 16px;
+
+}
+
+td.donor {
+  background-color: rgba(255,120,0, 0.9);
+ bottom: 0;
+}
+
+td.consumer {
+  background-color: red;
+}
+
+td.agent {
+  background-color: purple;
+}

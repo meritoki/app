@@ -12,6 +12,7 @@ html
     body
         .wrapper
             .header
+                img(src="/organization/img/DailyBreadWhiteLogo.png")#logo
                 nav.no-print
                     a.selected(href='#', id='menu-icon')
                     ul
@@ -23,11 +24,8 @@ html
                                         a.button.selected(href=val, title=key)= key
                                     else
                                         a.button(href=val, title=key)= key
-                span.notranslate
-                    h1 MANAGEMENT SYSTEM #{title}
             .content
                 block content
             .footer
-                span.notranslate
-                    p Version 0.1 Copyright 2018 MERITOKI All Right Reserved
+                p Version 0.1 Copyright 2018 MERITOKI All Right Reserved
         block body-script
