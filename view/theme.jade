@@ -13,17 +13,7 @@ html
         .wrapper
             .header
                 img(src="/organization/img/DailyBreadWhiteLogo.png")#logo
-                nav.no-print
-                    a.selected(href='#', id='menu-icon')
-                    ul
-                        if typeof(menu) !== 'undefined'
-                            -var selected = 'home';
-                            each val, key in menu
-                                li
-                                    if selected === key
-                                        a.button.selected(href=val, title=key)= key
-                                    else
-                                        a.button(href=val, title=key)= key
+    
             .content
                 block content
             .footer
