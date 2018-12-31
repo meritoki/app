@@ -7,6 +7,8 @@ var properties = require('../properties.js');
 var fs = require('fs');
 var path = require('path');
 var bcrypt = require('bcryptjs');
+var Request = require('request');
+var request = require('request-promise');
 
 var getMenu = function(role) {
   var m = {};
@@ -47,12 +49,53 @@ exports.getAccount = function(req, res, next) {
   var idUser = user.idUser;
   var role = user.role;
   var menu = getMenu(role);
-  // if (isAuthorized(role, "consumer")) {
-      res.render('account', {
-        title: 'ACCOUNT',
-        menu: menu,
-        user: user
+
+  Request.post({
+    "headers": { "content-type": "application/json" },
+    "url": "http://localhost:3001/v1/user/id",
+    "body": JSON.stringify({
+        "idUser": idUser
+    })
+  }, (error, response, body) => {
+      if(error) {
+          console.log(error);
+      }
+      var u = null;
+      try {
+        u = JSON.parse(body);
+      } catch (e) {
+          console.log(e);
+      }
+      const promises = [
+        request.post({
+          "headers": { "content-type": "application/json" },
+          "url": "http://localhost:3002/v1/location/id",
+          "body": JSON.stringify({
+              "idConsumer": u.idConsumer
+          })
+        }),
+        request.post({
+          "headers": { "content-type": "application/json" },
+          "url": "http://localhost:3003/v1/id/id",
+          "body": JSON.stringify({
+            "idConsumer": u.idConsumer
+          })
+        })
+      ];
+
+      Promise.all(promises).then(function(result){
+        res.render('account', {
+          title: 'ACCOUNT',
+          menu: menu,
+          user: user,
+          location: JSON.parse(result[0]),
+          id: JSON.parse(result[1])
+        });
       });
+  });
+
+  // if (isAuthorized(role, "consumer")) {
+
   // }
 };
 

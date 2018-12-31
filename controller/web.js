@@ -33,7 +33,7 @@ var client  = redis.createClient();
 
 console.log(properties.name);
 console.log("version "+properties.version);
-security.log(web);
+// security.log(web);
 web.set('views', view);
 web.set('view engine', 'jade');
 web.use(express.static(view + '/public'));

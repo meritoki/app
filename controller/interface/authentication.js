@@ -15,7 +15,7 @@ var passportHTTPBearerStrategy = passportHTTPBearer.Strategy;
 var Request = require("request");
 
 passport.use('local', new passportLocalStrategy({
-        usernameField: 'username',
+        usernameField: 'name',
         passwordField: 'password',
         session: false
     },
@@ -30,34 +30,49 @@ passport.use('local', new passportLocalStrategy({
           })
         }, (error, response, body) => {
             if(error) {
-                return console.dir(error);
+                return done(error,null);
             }
-            return done(null, body);
+            var user = null;
+            try {
+              user = JSON.parse(body);
+            } catch (e) {
+                console.log(e);
+            }
+            return done(null, user);
         });
-        // relational.getNamePasswordUser(name, password, function (err, u) {
-        //     return done(err, u);
-        // });
     }
 ));
 
 passport.serializeUser(function (user, done) {
     console.log('authentication.serializeUser');
+    // user = JSON.parse(user);
     done(null, user);
 });
 passport.deserializeUser(function (user, done) {
     console.log('authentication.deserializeUser');
     Request.post({
       "headers": { "content-type": "application/json" },
-      "url": "http://localhost:3000/auth/name",
+      "url": "http://localhost:3000/v1/auth/name",
       "body": JSON.stringify({
           "name": user.name
       })
     }, (error, response, body) => {
         if(error) {
-            return console.dir(error);
+            return done (error, null);
         }
-        return done(null, body);
+        var user = null;
+        try {
+          user = JSON.parse(body);
+        } catch (e) {
+            console.log(e);
+        }
+        return done(null, user);
+        //return done(null, JSON.stringify(body));
     });
+
+    // relational.getNameUser(user.name, function (err, user) {
+    //     done(err, user);
+    // });
 });
 
 passport.use(new passportHTTPBasicStrategy(
@@ -74,7 +89,108 @@ passport.use(new passportHTTPBasicStrategy(
             if(error) {
                 return console.dir(error);
             }
-            return done(null, body);
+            var user = null;
+            try {
+              user = JSON.parse(body);
+            } catch (e) {
+                console.log(e);
+            }
+            return done(null, user);
         });
+    }
+));
+
+passport.use(new passportOauth2ClientPasswordStrategy(
+    function (identification, secret, done) {
+        console.log('authentication.passportOauth2ClientPasswordStrategy ' + identification);
+        Request.post({
+          "headers": { "content-type": "application/json" },
+          "url": "http://localhost:3000/v1/auth/client",
+          "body": JSON.stringify({
+              "identification": identification
+          })
+        }, (error, response, body) => {
+            if (error) {
+                return done(err);
+            }
+            var client = null;
+            try {
+              client = JSON.parse(body);
+            } catch (e) {
+                console.log(e);
+            }
+            console.log(client);
+            console.log(client.secret+ " "+secret);
+            if (!client) {
+                return done(null, false);
+            }
+            if (client.secret != secret) {
+                return done(null, false);
+            }
+            // console.log(client);
+            return done(null, JSON.stringify(client));
+        });
+    }
+));
+
+passport.use(new passportHTTPBearerStrategy(
+    function (token, done) {
+        console.log('authentication.passportHTTPBearerStrategy ' + token);
+        Request.post({
+          "headers": { "content-type": "application/json" },
+          "url": "http://localhost:3000/v1/auth/token",
+          "body": JSON.stringify({
+              "key": key
+          })
+        }, (error, response, token) => {
+            if(error) {
+                return done (error, null);
+            }
+            if (!token) {
+                return done(null, false);
+            }
+            Request.post({
+              "headers": { "content-type": "application/json" },
+              "url": "http://localhost:3000/v1/auth/id",
+              "body": JSON.stringify({
+                  "id": token.idUser
+              })
+            }, (error, response, user) => {
+                if(error) {
+                    return done(error, null);
+                }
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false);
+                }
+                var info = {
+                    scope: '*'
+                }
+                done(null, user, info);
+            });
+        });
+        // rel
+        // relational.getToken(token, function (err, token) {
+        //     if (err) {
+        //         return done(err);
+        //     }
+        //     if (!token) {
+        //         return done(null, false);
+        //     }
+        //     relational.getIDUser(token.idUser, function (err, user) {
+        //         if (err) {
+        //             return done(err);
+        //         }
+        //         if (!user) {
+        //             return done(null, false);
+        //         }
+        //         var info = {
+        //             scope: '*'
+        //         }
+        //         done(null, user, info);
+        //     });
+        // });
     }
 ));

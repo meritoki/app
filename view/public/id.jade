@@ -1,0 +1,24 @@
+extend ../theme
+block append head-link
+    link(rel='stylesheet', href='/organization/css/public/index.css')
+block content
+
+  form(action="/v1/auth/add", method='post')
+    input(type='hidden', name="role", value="donor")
+    br
+    | Full Name
+    input(type="test" name="fullName")
+    br
+    input(type="radio" name="gender" value="male" checked)
+    | Male
+    br
+    input(type="radio" name="gender" value="female")
+    | Female
+    br
+    input(type="radio" name="gender" value="other")
+    | Other
+    br
+    |Birthday
+    input(type="date" name="birthDate")
+
+    input(type="submit" value="Save")

@@ -10,6 +10,7 @@ exports.delete = function(router) {
 };
 
 exports.get = function(router, passport) {
+  //authentifcation
   console.log('app.path.get()');
   router.get("/", public.getIndex);
   router.get("/account", connectEnsureLogin.ensureLoggedIn(), user.getAccount);
@@ -17,6 +18,10 @@ exports.get = function(router, passport) {
   router.get("/login/failure", public.getLoginFailure);
   router.get("/logout", public.getLogout);
   router.get("/not-authorized", connectEnsureLogin.ensureLoggedIn(), public.getNotAuthorized);
+  //registration
+  // router.get("/register", public.getRegister);
+  // router.get("/register/id", public.getRegisterID);
+  // router.get("/register/location", public.getRegisterLocation);
 };
 
 exports.post = function(router, passport) {

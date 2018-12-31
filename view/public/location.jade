@@ -1,0 +1,23 @@
+extend ../theme
+block append head-link
+    link(rel='stylesheet', href='/organization/css/public/index.css')
+block content
+
+  form(action="/v1/auth/add", method='post')
+    input(type='hidden', name="role", value="donor")
+    br
+    | Address One
+    input(type="test" name="addressOne")
+    br
+    | City
+    input(type="test" name="city")
+    br
+    | State
+    input(type="test" name="state")
+    br
+    | Zip Code
+    input(type="test" name="zipCode")
+    select(name='country')
+      option(value='') Country...
+      option(value='AR') Argentina
+      option(value='US') United States of America
