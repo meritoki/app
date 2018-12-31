@@ -80,16 +80,33 @@ exports.getAccount = function(req, res, next) {
           "body": JSON.stringify({
             "idConsumer": u.idConsumer
           })
+        }),
+        request.post({
+          "headers": { "content-type": "application/json" },
+          "url": "http://localhost:3004/v1/msg/phone/id",
+          "body": JSON.stringify({
+            "idConsumer": u.idConsumer
+          })
+        }),
+        request.post({
+          "headers": { "content-type": "application/json" },
+          "url": "http://localhost:3004/v1/msg/email/id",
+          "body": JSON.stringify({
+            "idConsumer": u.idConsumer
+          })
         })
       ];
 
       Promise.all(promises).then(function(result){
+        console.log(result);
         res.render('account', {
           title: 'ACCOUNT',
           menu: menu,
           user: user,
           location: JSON.parse(result[0]),
-          id: JSON.parse(result[1])
+          id: JSON.parse(result[1]),
+          phone: JSON.parse(result[2]),
+          email: JSON.parse(result[3])
         });
       });
   });
