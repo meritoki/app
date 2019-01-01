@@ -1,0 +1,21 @@
+extend ../theme
+block append head-link
+    link(rel='stylesheet', href='/organization/css/register/index.css')
+block content
+    .register
+      h1.alert #{message}
+      br
+      form(action="/register", method='post')
+        input(type='hidden', name="role", value="donor")
+        h1 Email
+        - if (name)
+          input(type="text" name="name" value="#{name}")
+        - else
+          input(type="text" name="name" )
+        h1 Password
+        input(type="password" name="password")
+        h1 Confirm
+        input(type="password" name="confirm")
+        input(type="hidden" name="role" value="consumer")
+        br
+        input(type='submit', class='button', value='SUBMIT', id="save").black

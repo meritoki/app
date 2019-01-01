@@ -1,9 +1,0 @@
-extends ../theme
-
-block append head-link
-    link(rel='stylesheet', href='/meritbuilders/css/account/parser.css')
-block content
-  .content-wrapper
-    form(id='upload' enctype='multipart/form-data' action='file' method='post')
-      input(type='file' name='userFile')
-      input(type="submit" value="UPLOAD" name="SUBMIT")

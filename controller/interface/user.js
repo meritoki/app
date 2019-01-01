@@ -20,6 +20,11 @@ var getMenu = function(role) {
         'ACCOUNT': '/account',
         'LOGOUT': '/logout'
       }
+    } else if (('consumer').indexOf(role) > -1) {
+      m = {
+        'ACCOUNT': '/account',
+        'LOGOUT': '/logout'
+      }
     } else {
       m = {
         'HOME': '/account',
@@ -49,68 +54,83 @@ exports.getAccount = function(req, res, next) {
   var idUser = user.idUser;
   var role = user.role;
   var menu = getMenu(role);
-
-  Request.post({
-    "headers": { "content-type": "application/json" },
-    "url": "http://localhost:3001/v1/user/id",
-    "body": JSON.stringify({
-        "idUser": idUser
-    })
-  }, (error, response, body) => {
-      if(error) {
-          console.log(error);
-      }
-      var u = null;
-      try {
-        u = JSON.parse(body);
-      } catch (e) {
-          console.log(e);
-      }
-      const promises = [
-        request.post({
-          "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3002/v1/location/id",
-          "body": JSON.stringify({
+  if(user.active) {
+    Request.post({
+      "headers": { "content-type": "application/json" },
+      "url": "http://localhost:3001/v1/user/id",
+      "body": JSON.stringify({
+          "idUser": idUser
+      })
+    }, (error, response, body) => {
+        if(error) {
+            console.log(error);
+        }
+        var u = null;
+        try {
+          u = JSON.parse(body);
+        } catch (e) {
+            console.log(e);
+        }
+        const promises = [
+          request.post({
+            "headers": { "content-type": "application/json" },
+            "url": "http://localhost:3002/v1/location/id",
+            "body": JSON.stringify({
+                "idConsumer": u.idConsumer
+            })
+          }),
+          request.post({
+            "headers": { "content-type": "application/json" },
+            "url": "http://localhost:3003/v1/id/id",
+            "body": JSON.stringify({
               "idConsumer": u.idConsumer
+            })
+          }),
+          request.post({
+            "headers": { "content-type": "application/json" },
+            "url": "http://localhost:3004/v1/msg/phone/id",
+            "body": JSON.stringify({
+              "idConsumer": u.idConsumer
+            })
+          }),
+          request.post({
+            "headers": { "content-type": "application/json" },
+            "url": "http://localhost:3004/v1/msg/email/id",
+            "body": JSON.stringify({
+              "idConsumer": u.idConsumer
+            })
           })
-        }),
-        request.post({
-          "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3003/v1/id/id",
-          "body": JSON.stringify({
-            "idConsumer": u.idConsumer
-          })
-        }),
-        request.post({
-          "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3004/v1/msg/phone/id",
-          "body": JSON.stringify({
-            "idConsumer": u.idConsumer
-          })
-        }),
-        request.post({
-          "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3004/v1/msg/email/id",
-          "body": JSON.stringify({
-            "idConsumer": u.idConsumer
-          })
-        })
-      ];
+        ];
 
-      Promise.all(promises).then(function(result){
-        console.log(result);
-        res.render('account', {
-          title: 'ACCOUNT',
-          menu: menu,
-          user: user,
-          location: JSON.parse(result[0]),
-          id: JSON.parse(result[1]),
-          phone: JSON.parse(result[2]),
-          email: JSON.parse(result[3])
+        Promise.all(promises).then(function(result){
+          console.log(result);
+          res.render('account', {
+            title: 'ACCOUNT',
+            menu: menu,
+            user: user,
+            location: JSON.parse(result[0]),
+            id: JSON.parse(result[1]),
+            phone: JSON.parse(result[2]),
+            email: JSON.parse(result[3])
+          });
+        }).catch(function(err){
+          res.render('account', {
+            title: 'ACCOUNT',
+            menu: menu,
+            user: user,
+            location: null,
+            id: null,
+            phone: null,
+            email: null
+          });
         });
       });
-  });
-
+    } else {
+      res.render('register/email', {
+        message: "Email exits, need to verify",
+        user: user
+      });
+    }
   // if (isAuthorized(role, "consumer")) {
 
   // }

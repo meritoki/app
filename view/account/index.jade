@@ -1,7 +1,133 @@
 extends ../theme
-
 block append head-link
+    link(rel='stylesheet', href='/organization/css/account/index.css')
 
 block content
 
-  | Hello World idUser #{location.addressOne} #{id.name} #{phone.number} #{email.address}
+  button.accordion Identification
+  .panel
+    p
+      - if (id && id.name != null)
+        table
+          tr
+            td
+              h1 Name
+            td
+              | #{id.name}
+      - else
+        form(action="/v1/auth/add", method='post')
+          input(type='hidden', name="role", value="donor")
+          br
+          | Full Name
+          input(type="test" name="fullName")
+          br
+          input(type="radio" name="gender" value="male" checked)
+          | Male
+          br
+          input(type="radio" name="gender" value="female")
+          | Female
+          br
+          input(type="radio" name="gender" value="other")
+          | Other
+          br
+          |Birthday
+          input(type="date" name="birthDate")
+
+          input(type="submit" value="Save")
+
+  button.accordion Location
+  .panel
+    p
+      - if (location && location.addressOne != null || location.city != null)
+        table
+          tr
+            td
+              h1 Address
+            td
+              | #{location.addressOne}
+          tr
+            td
+              h1 City
+            td
+              | #{location.city}
+          tr
+            td
+              h1 Zip Code
+            td
+              | #{location.zipCode}
+      - else
+        form(action="/v1/auth/add", method='post')
+          input(type='hidden', name="role", value="donor")
+          br
+          | Address One
+          input(type="test" name="addressOne")
+          br
+          | City
+          input(type="test" name="city")
+          br
+          | State
+          input(type="test" name="state")
+          br
+          | Zip Code
+          input(type="test" name="zipCode")
+          select(name='country')
+            option(value='') Country...
+            option(value='AR') Argentina
+            option(value='US') United States of America
+  button.accordion Message
+  .panel
+    p
+
+        table
+          tr
+            td
+              h1 Email Address
+            td
+              - if (email && email.address != null)
+                | #{email.address}
+          tr
+            td
+              h1 Phone Number
+            td
+              - if (phone && phone.number)
+                | #{phone.number}
+              - else
+                | Enter Phone Number
+            td
+              | Verify
+  button.accordion Card
+  .panel
+    p
+      table
+          tr
+            td
+              h1 Default
+            td
+              h1 Masked PAN
+            td
+              h1 Expiration Date
+          tr
+            td
+              | Yes
+            td
+              | 123456***1234
+            td
+              | 12/20
+
+
+block body-script
+    script.
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+        }

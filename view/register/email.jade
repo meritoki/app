@@ -1,0 +1,8 @@
+extend ../theme
+block append head-link
+    link(rel='stylesheet', href='/organization/css/public/index.css')
+block content
+    | Verify the following email address #{user.name}
+    form(action="/verification", method='post')
+      input(type="hidden" name="to" value="#{user.name}")
+      input(type='submit', class='button', value='SEND')

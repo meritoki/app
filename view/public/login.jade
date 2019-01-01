@@ -2,15 +2,15 @@ extends ../theme
 block append head-link
     link(rel='stylesheet', href='/organization/css/public/login.css')
 block content
+    .login
         form(class="login-form", action="#{action}", method="POST")
-            h3.message #{message}
+            h3.alert #{message}
+            brs
             br
-            label User
-            br
-            label Name
+            h1 Email
             input(type="text", name="name", id="name", autocomplete="off")
-            label Password
+            h1 Password
             input(type="password", name="password", id="password")
             br
             br
-            input(type="submit", class="button", value="LOGIN")
+            input(type="submit", class="button", value="LOGIN").black
