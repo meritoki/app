@@ -26,7 +26,9 @@
           if (error) {
             res.end(error);
           } else {
-            res.end(body);
+            res.render('register/email', {
+              message: "Need to verify",
+            });
           }
       });
   }
