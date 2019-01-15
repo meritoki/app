@@ -1,5 +1,6 @@
 
   var Request = require("request");
+  var properties = require('../properties.js');
 
   var menu = {
     'REGISTER': '/register',
@@ -18,7 +19,7 @@
   exports.postEmailVerification = function(req, res, next) {
       Request.post({
         "headers": { "content-type": "application/json" },
-        "url": "http://localhost:3004/v1/msg/email/verification",
+        "url": "http://"+properties.service.msg.url+"/v1/msg/email/verification",
         "body": JSON.stringify({
             "to": req.body.to
         })
@@ -42,7 +43,7 @@
     }
     Request.get({
       "headers": { "content-type": "application/json" },
-      "url": "http://localhost:3004/v1/msg/email/verify",
+      "url": "http://"+properties.service.msg.url+"/v1/msg/email/verify",
       "qs": {
           "mail": req.query.mail,
           "id": req.query.id

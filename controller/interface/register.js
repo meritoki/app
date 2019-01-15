@@ -73,7 +73,7 @@ exports.postIndex = function(req, res) {
   if(validateEmail(name) && valid(name) && valid(confirm) && valid(password) && password == confirm){
     Request.post({
       "headers": { "content-type": "application/json" },
-      "url": "http://localhost:3000/v1/auth/name",
+      "url": "http://"+properties.service.auth.url+"/v1/auth/name",
       "body": JSON.stringify({
           "name": req.body.name
       })
@@ -84,7 +84,7 @@ exports.postIndex = function(req, res) {
         if(body == "Unauthorized")  {
           Request.post({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3000/v1/auth",
+            "url": "http://"+properties.service.auth.url+"/v1/auth",
             "body": JSON.stringify(req.body)
           }, (error, response, body) => {
             console.log(body);

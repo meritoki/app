@@ -13,6 +13,7 @@ var passportHTTPBasicStrategy = passportHTTP.BasicStrategy;
 var passportOauth2ClientPasswordStrategy = passportOauth2ClientPassword.Strategy;
 var passportHTTPBearerStrategy = passportHTTPBearer.Strategy;
 var Request = require("request");
+var properties = require('../properties.js');
 
 passport.use('local', new passportLocalStrategy({
         usernameField: 'name',
@@ -23,7 +24,7 @@ passport.use('local', new passportLocalStrategy({
         console.log('authentication.passportLocalStrategy');
         Request.post({
           "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3000/v1/auth/name/password",
+          "url": "http://"+properties.service.auth.url+"/v1/auth/name/password",
           "body": JSON.stringify({
               "name": name,
               "password":password
@@ -52,7 +53,7 @@ passport.deserializeUser(function (user, done) {
     console.log('authentication.deserializeUser');
     Request.post({
       "headers": { "content-type": "application/json" },
-      "url": "http://localhost:3000/v1/auth/name",
+      "url": "http://"+properties.service.auth.url+"/v1/auth/name",
       "body": JSON.stringify({
           "name": user.name
       })
@@ -80,7 +81,7 @@ passport.use(new passportHTTPBasicStrategy(
         console.log('authentication.passportHTTPBasicStrategy ' + name);
         Request.post({
           "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3000/v1/auth/name/password",
+          "url": "http://"+properties.service.auth.url+"/v1/auth/name/password",
           "body": JSON.stringify({
               "name": name,
               "password":password
@@ -105,7 +106,7 @@ passport.use(new passportOauth2ClientPasswordStrategy(
         console.log('authentication.passportOauth2ClientPasswordStrategy ' + identification);
         Request.post({
           "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3000/v1/auth/client",
+          "url": "http://"+properties.service.auth.url+"/v1/auth/client",
           "body": JSON.stringify({
               "identification": identification
           })
@@ -138,7 +139,7 @@ passport.use(new passportHTTPBearerStrategy(
         console.log('authentication.passportHTTPBearerStrategy ' + token);
         Request.post({
           "headers": { "content-type": "application/json" },
-          "url": "http://localhost:3000/v1/auth/token",
+          "url": "http://"+properties.service.auth.url+"/v1/auth/token",
           "body": JSON.stringify({
               "key": key
           })
@@ -151,7 +152,7 @@ passport.use(new passportHTTPBearerStrategy(
             }
             Request.post({
               "headers": { "content-type": "application/json" },
-              "url": "http://localhost:3000/v1/auth/id",
+              "url": "http://"+properties.service.auth.url+"/v1/auth/id",
               "body": JSON.stringify({
                   "id": token.idUser
               })

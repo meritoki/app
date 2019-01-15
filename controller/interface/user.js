@@ -57,7 +57,7 @@ exports.getAccount = function(req, res, next) {
   if(user.active) {
     Request.post({
       "headers": { "content-type": "application/json" },
-      "url": "http://localhost:3001/v1/user/id",
+      "url": "http://"+properties.service.user.url+"/v1/user/id",
       "body": JSON.stringify({
           "idUser": idUser
       })
@@ -74,28 +74,28 @@ exports.getAccount = function(req, res, next) {
         const promises = [
           request.post({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3002/v1/location/id",
+            "url": "http://"+properties.service.location.url+"/v1/location/id",
             "body": JSON.stringify({
                 "idConsumer": u.idConsumer
             })
           }),
           request.post({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3003/v1/id/id",
+            "url": "http://"+properties.service.id.url+"/v1/id/id",
             "body": JSON.stringify({
               "idConsumer": u.idConsumer
             })
           }),
           request.post({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3004/v1/msg/phone/id",
+            "url": "http://"+properties.service.msg.url+"/v1/msg/phone/id",
             "body": JSON.stringify({
               "idConsumer": u.idConsumer
             })
           }),
           request.post({
             "headers": { "content-type": "application/json" },
-            "url": "http://localhost:3004/v1/msg/email/id",
+            "url": "http://"+properties.service.msg.url+"/v1/msg/email/id",
             "body": JSON.stringify({
               "idConsumer": u.idConsumer
             })
